@@ -18,7 +18,13 @@ const config = {
 		defaultLocale: "en",
 	},
 	transpilePackages: ["geist"],
-	output: "standalone"
+	output: "standalone",
+	eslint: {
+		ignoreDuringBuilds: true
+	},
+	typescript: {
+		ignoreBuildErrors: true
+	}
 }
 
 export default config

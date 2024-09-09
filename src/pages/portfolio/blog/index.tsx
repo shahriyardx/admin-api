@@ -16,7 +16,6 @@ import { Badge } from "@/components/ui/badge"
 
 const PortfolioBlogs = () => {
 	const { data: blogs } = api.portfolio.allBlogs.useQuery()
-	console.log(blogs)
 
 	const columns: ColumnDef<PortfolioBlog>[] = [
 		{ accessorKey: "title", header: "Title" },
