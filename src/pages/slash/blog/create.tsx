@@ -19,7 +19,13 @@ const CreateBlog = () => {
 	const { mutate: insertBlog } = api.slash.createBlog.useMutation({
 		onSuccess: () => {
 			toast.success("blog created")
-			form.reset()
+			form.reset({
+				content: "",
+				description: "",
+				slug: "",
+				status: "published",
+				title: "",
+			})
 			fetch("https://ccbot.app/api/blog/revalidate", {
 				method: "POST",
 			})

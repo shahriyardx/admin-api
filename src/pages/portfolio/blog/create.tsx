@@ -19,7 +19,14 @@ const CreateBlog = () => {
 	const { mutate: insertBlog } = api.portfolio.createBlog.useMutation({
 		onSuccess: () => {
 			toast.success("blog created")
-			form.reset()
+			form.reset({
+				content: "",
+				description: "",
+				slug: "",
+				status: "published",
+				title: "",
+				categories: [],
+			})
 
 			fetch("https://shahriyar.dev/api/blog/webhook", {
 				method: "POST",
