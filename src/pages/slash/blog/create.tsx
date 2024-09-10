@@ -1,7 +1,7 @@
-import PortfolioBlogForms from "@/components/forms/PortfolioBlogForms"
+import SlashBlogForms from "@/components/forms/SlashBlogForm"
 import AdminDashboard from "@/components/layouts/AdminDashboard"
 import { Button } from "@/components/ui/button"
-import { type PortfolioBlog, portfolioBlogSchema } from "@/schema"
+import { type SlashBlog, slashBlogSchema } from "@/schema"
 import { api } from "@/utils/api"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { kebabCase } from "lodash"
@@ -12,11 +12,11 @@ import { useForm } from "react-hook-form"
 import { toast } from "sonner"
 
 const CreateBlog = () => {
-	const form = useForm<PortfolioBlog>({
-		resolver: zodResolver(portfolioBlogSchema),
+	const form = useForm<SlashBlog>({
+		resolver: zodResolver(slashBlogSchema),
 	})
 
-	const { mutate: insertBlog } = api.portfolio.createBlog.useMutation({
+	const { mutate: insertBlog } = api.slash.createBlog.useMutation({
 		onSuccess: () => {
 			toast.success("blog created")
 			form.reset()
@@ -28,7 +28,7 @@ const CreateBlog = () => {
 
 	const slug = kebabCase(form.watch("title"))
 
-	const createBlog = (values: PortfolioBlog) => {
+	const createBlog = (values: SlashBlog) => {
 		insertBlog(values)
 	}
 
@@ -44,14 +44,14 @@ const CreateBlog = () => {
 					<Button variant="secondary" asChild>
 						<div>
 							<ChevronLeft size={15} className="mr-2" />
-							<Link href="/portfolio/blog">See Blogs</Link>
+							<Link href="/slash/blog">See Blogs</Link>
 						</div>
 					</Button>
 				</div>
 			}
 		>
 			<div className="mt-5">
-				<PortfolioBlogForms form={form} onSubmit={createBlog} />
+				<SlashBlogForms form={form} onSubmit={createBlog} />
 			</div>
 		</AdminDashboard>
 	)

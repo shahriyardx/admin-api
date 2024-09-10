@@ -13,3 +13,13 @@ export const portfolioBlogSchema = z.object({
 })
 
 export type PortfolioBlog = z.infer<typeof portfolioBlogSchema>
+
+export const slashBlogSchema = z.object({
+	title: z.string({ message: "title is required " }),
+	description: z.string({ message: "description is required" }),
+	slug: z.string({ message: "slug is required" }),
+	content: z.string({ message: "content is required" }),
+	status: z.enum(["published", "draft", "unlisted"]).default("published"),
+})
+
+export type SlashBlog = z.infer<typeof slashBlogSchema>

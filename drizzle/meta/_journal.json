@@ -8,6 +8,13 @@
       "when": 1725895941117,
       "tag": "0000_worthless_tarantula",
       "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "7",
+      "when": 1725950684527,
+      "tag": "0001_sudden_squirrel_girl",
+      "breakpoints": true
     }
   ]
 }

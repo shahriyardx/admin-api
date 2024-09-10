@@ -1,6 +1,5 @@
 import { sql } from "drizzle-orm"
 import {
-	bigserial,
 	pgEnum,
 	pgTableCreator,
 	text,
@@ -37,7 +36,25 @@ export const portfolioblogs = createTable("portfolioblogs", {
 	),
 })
 
+export const slashblogs = createTable("slashblogs", {
+	id: text("id")
+		.$defaultFn(() => createId())
+		.primaryKey(),
+	title: varchar("title", { length: 256 }).notNull(),
+	description: varchar("description", { length: 512 }).notNull(),
+	slug: varchar("slug", { length: 512 }).unique().notNull(),
+	content: text("content").notNull(),
+	status: blogStatus("status").notNull().default("published"),
+	createdAt: timestamp("created_at", { withTimezone: true })
+		.default(sql`CURRENT_TIMESTAMP`)
+		.notNull(),
+	updatedAt: timestamp("updated_at", { withTimezone: true }).$onUpdate(
+		() => new Date(),
+	),
+})
+
 export type PortfolioBlog = typeof portfolioblogs.$inferSelect
+export type SlashBlog = typeof slashblogs.$inferSelect
 
 export const getFirst = <T extends any[]>(values: T): T[number] => {
 	if (values.length !== 1) return null
