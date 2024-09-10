@@ -30,7 +30,6 @@ import useSettings from "@/hooks/use-settings"
 
 const SlashBlogs = () => {
 	const settings = useSettings()
-	const [deleteOpen, setDeleteOpen] = useState(false)
 
 	const { data: blogs, refetch } = api.slash.allBlogs.useQuery()
 	const { mutate: deleteBlog } = api.slash.deleteBlog.useMutation({
@@ -49,6 +48,7 @@ const SlashBlogs = () => {
 	})
 
 	const columns: ColumnDef<SlashBlog>[] = [
+		{ accessorKey: "id", header: "ID" },
 		{ accessorKey: "title", header: "Title" },
 		{ accessorKey: "description", header: "Description" },
 		{
@@ -80,11 +80,8 @@ const SlashBlogs = () => {
 						<Button variant="secondary" asChild>
 							<Link href={`/slash/blog/${row.original.id}`}>Edit</Link>
 						</Button>
-						<Dialog
-							open={deleteOpen}
-							onOpenChange={() => setDeleteOpen(!deleteOpen)}
-						>
-							<DialogTrigger>
+						<Dialog>
+							<DialogTrigger asChild>
 								<Button variant="destructive">Delete</Button>
 							</DialogTrigger>
 							<DialogContent>
@@ -99,16 +96,17 @@ const SlashBlogs = () => {
 									<DialogClose>
 										<Button variant="secondary">Cancel</Button>
 									</DialogClose>
-									<Button
-										onClick={() => {
-											setDeleteOpen(false)
-											deleteBlog({ blogId: row.original.id })
-										}}
-										type="button"
-										variant="destructive"
-									>
-										Delete
-									</Button>
+									<DialogClose>
+										<Button
+											onClick={() => {
+												deleteBlog({ blogId: row.original.id })
+											}}
+											type="button"
+											variant="destructive"
+										>
+											Delete
+										</Button>
+									</DialogClose>
 								</DialogFooter>
 							</DialogContent>
 						</Dialog>

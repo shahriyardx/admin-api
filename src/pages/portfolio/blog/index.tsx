@@ -29,7 +29,6 @@ import { CogIcon } from "lucide-react"
 import useSettings from "@/hooks/use-settings"
 
 const PortfolioBlogs = () => {
-	const [deleteOpen, setDeleteOpen] = useState(false)
 	const settings = useSettings()
 
 	const { data: blogs, refetch } = api.portfolio.allBlogs.useQuery()
@@ -81,10 +80,7 @@ const PortfolioBlogs = () => {
 							<Link href={`/portfolio/blog/${row.original.id}`}>Edit</Link>
 						</Button>
 
-						<Dialog
-							open={deleteOpen}
-							onOpenChange={() => setDeleteOpen(!deleteOpen)}
-						>
+						<Dialog>
 							<DialogTrigger>
 								<Button variant="destructive">Delete</Button>
 							</DialogTrigger>
@@ -100,16 +96,17 @@ const PortfolioBlogs = () => {
 									<DialogClose>
 										<Button variant="secondary">Cancel</Button>
 									</DialogClose>
-									<Button
-										onClick={() => {
-											setDeleteOpen(false)
-											deleteBlog({ blogId: row.original.id })
-										}}
-										type="button"
-										variant="destructive"
-									>
-										Delete
-									</Button>
+									<DialogClose>
+										<Button
+											onClick={() => {
+												deleteBlog({ blogId: row.original.id })
+											}}
+											type="button"
+											variant="destructive"
+										>
+											Delete
+										</Button>
+									</DialogClose>
 								</DialogFooter>
 							</DialogContent>
 						</Dialog>
