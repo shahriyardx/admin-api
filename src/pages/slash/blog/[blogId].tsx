@@ -26,6 +26,10 @@ const UpdateBlog = ({ blog }: Props) => {
 	const { mutate } = api.slash.upadteBlog.useMutation({
 		onSuccess: () => {
 			toast.success("blog updated")
+			form.reset()
+			fetch("https://ccbot.app/api/blog/revalidate", {
+				method: "POST",
+			})
 		},
 		onError: (error) => {
 			toast.error(error.message)

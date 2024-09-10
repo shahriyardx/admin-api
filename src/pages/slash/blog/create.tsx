@@ -20,6 +20,9 @@ const CreateBlog = () => {
 		onSuccess: () => {
 			toast.success("blog created")
 			form.reset()
+			fetch("https://ccbot.app/api/blog/revalidate", {
+				method: "POST",
+			})
 		},
 		onError: (error) => {
 			toast.error(error.message)

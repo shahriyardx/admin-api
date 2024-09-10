@@ -20,6 +20,10 @@ const CreateBlog = () => {
 		onSuccess: () => {
 			toast.success("blog created")
 			form.reset()
+
+			fetch("https://shahriyar.dev/api/blog/webhook", {
+				method: "POST",
+			})
 		},
 		onError: (error) => {
 			toast.error(error.message)

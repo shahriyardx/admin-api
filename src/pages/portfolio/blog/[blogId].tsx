@@ -26,6 +26,9 @@ const UpdateBlog = ({ blog }: Props) => {
 	const { mutate } = api.portfolio.upadteBlog.useMutation({
 		onSuccess: () => {
 			toast.success("blog updated")
+			fetch("https://shahriyar.dev/api/blog/webhook", {
+				method: "POST",
+			})
 		},
 		onError: (error) => {
 			toast.error(error.message)
