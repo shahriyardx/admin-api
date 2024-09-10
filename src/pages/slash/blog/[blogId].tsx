@@ -31,6 +31,10 @@ const UpdateBlog = ({ blog }: Props) => {
 			if (settings?.slashBlogWebhook) {
 				fetch(settings?.slashBlogWebhook, {
 					method: "POST",
+					headers: {
+						"Content-Type": "application/json",
+					},
+					body: JSON.stringify(blog),
 				})
 			}
 		},

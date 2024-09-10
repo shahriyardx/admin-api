@@ -2,6 +2,12 @@ import React from "react"
 import {
 	BoldIcon,
 	CodeIcon,
+	Heading1,
+	Heading2,
+	Heading3,
+	Heading4,
+	Heading5,
+	Heading6,
 	ImageIcon,
 	ItalicIcon,
 	LinkIcon,
@@ -31,22 +37,22 @@ const Toolbar = () => {
 
 			<div className="flex gap-1">
 				<ToolbarButton command="h1">
-					<span className="text-sm">H1</span>
+						<Heading1 size={15} />
 				</ToolbarButton>
 				<ToolbarButton command="h2">
-					<span className="text-sm">H2</span>
+					<Heading2 size={15} />
 				</ToolbarButton>
 				<ToolbarButton command="h3">
-					<span className="text-sm">H3</span>
+					<Heading3 size={15} />
 				</ToolbarButton>
 				<ToolbarButton command="h4">
-					<span className="text-sm">H4</span>
+					<Heading4 size={15} />
 				</ToolbarButton>
 				<ToolbarButton command="h5">
-					<span className="text-sm">H5</span>
+					<Heading5 size={15} />
 				</ToolbarButton>
 				<ToolbarButton command="h6">
-					<span className="text-sm">H6</span>
+					<Heading6 size={15} />
 				</ToolbarButton>
 			</div>
 
