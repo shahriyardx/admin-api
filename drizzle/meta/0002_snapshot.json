@@ -1,6 +1,6 @@
 {
-	"id": "1894d5ca-9de3-45b8-b896-a8b347f305e9",
-	"prevId": "a1aa9bcd-72e6-4831-9163-6d4137b94467",
+	"id": "841c92a8-804b-4021-b24d-3d8a843c17c8",
+	"prevId": "1894d5ca-9de3-45b8-b896-a8b347f305e9",
 	"version": "7",
 	"dialect": "postgresql",
 	"tables": {
@@ -76,6 +76,34 @@
 					"columns": ["slug"]
 				}
 			}
+		},
+		"public.admin_settings": {
+			"name": "admin_settings",
+			"schema": "",
+			"columns": {
+				"id": {
+					"name": "id",
+					"type": "text",
+					"primaryKey": true,
+					"notNull": true
+				},
+				"portfolio_blog_webhook": {
+					"name": "portfolio_blog_webhook",
+					"type": "text",
+					"primaryKey": false,
+					"notNull": false
+				},
+				"slash_blog_webhook": {
+					"name": "slash_blog_webhook",
+					"type": "text",
+					"primaryKey": false,
+					"notNull": false
+				}
+			},
+			"indexes": {},
+			"foreignKeys": {},
+			"compositePrimaryKeys": {},
+			"uniqueConstraints": {}
 		},
 		"public.admin_slashblogs": {
 			"name": "admin_slashblogs",

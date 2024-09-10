@@ -1,6 +1,7 @@
 import SlashBlogForms from "@/components/forms/SlashBlogForm"
 import AdminDashboard from "@/components/layouts/AdminDashboard"
 import { Button } from "@/components/ui/button"
+import useSettings from "@/hooks/use-settings"
 import { type SlashBlog, slashBlogSchema } from "@/schema"
 import { api } from "@/utils/api"
 import { zodResolver } from "@hookform/resolvers/zod"
@@ -12,6 +13,7 @@ import { useForm } from "react-hook-form"
 import { toast } from "sonner"
 
 const CreateBlog = () => {
+	const settings = useSettings()
 	const form = useForm<SlashBlog>({
 		resolver: zodResolver(slashBlogSchema),
 	})
@@ -26,9 +28,12 @@ const CreateBlog = () => {
 				status: "published",
 				title: "",
 			})
-			fetch("https://ccbot.app/api/blog/revalidate", {
-				method: "POST",
-			})
+
+			if (settings?.slashBlogWebhook) {
+				fetch(settings?.slashBlogWebhook, {
+					method: "POST",
+				})
+			}
 		},
 		onError: (error) => {
 			toast.error(error.message)

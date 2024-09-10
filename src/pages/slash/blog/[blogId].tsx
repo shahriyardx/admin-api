@@ -2,6 +2,7 @@ import SlashBlogForms from "@/components/forms/SlashBlogForm"
 import AdminDashboard from "@/components/layouts/AdminDashboard"
 import { Button } from "@/components/ui/button"
 import useParams from "@/hooks/use-params"
+import useSettings from "@/hooks/use-settings"
 import { type SlashBlog, slashBlogSchema } from "@/schema"
 import { db } from "@/server/db"
 import { getFirst, slashblogs } from "@/server/db/schema"
@@ -21,14 +22,17 @@ type Props = {
 }
 
 const UpdateBlog = ({ blog }: Props) => {
+	const settings = useSettings()
 	const { blogId } = useParams<{ blogId: string }>()
 
 	const { mutate } = api.slash.upadteBlog.useMutation({
 		onSuccess: () => {
 			toast.success("blog updated")
-			fetch("https://ccbot.app/api/blog/revalidate", {
-				method: "POST",
-			})
+			if (settings?.slashBlogWebhook) {
+				fetch(settings?.slashBlogWebhook, {
+					method: "POST",
+				})
+			}
 		},
 		onError: (error) => {
 			toast.error(error.message)

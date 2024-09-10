@@ -2,6 +2,7 @@ import PortfolioBlogForms from "@/components/forms/PortfolioBlogForms"
 import AdminDashboard from "@/components/layouts/AdminDashboard"
 import { Button } from "@/components/ui/button"
 import useParams from "@/hooks/use-params"
+import useSettings from "@/hooks/use-settings"
 import { type PortfolioBlog, portfolioBlogSchema } from "@/schema"
 import { db } from "@/server/db"
 import { getFirst, portfolioblogs } from "@/server/db/schema"
@@ -21,14 +22,17 @@ type Props = {
 }
 
 const UpdateBlog = ({ blog }: Props) => {
+	const settings = useSettings()
 	const { blogId } = useParams<{ blogId: string }>()
 
 	const { mutate } = api.portfolio.upadteBlog.useMutation({
 		onSuccess: () => {
 			toast.success("blog updated")
-			fetch("https://shahriyar.dev/api/blog/webhook", {
-				method: "POST",
-			})
+			if (settings?.portfolioBlogWebhook) {
+				fetch(settings?.portfolioBlogWebhook, {
+					method: "POST",
+				})
+			}
 		},
 		onError: (error) => {
 			toast.error(error.message)

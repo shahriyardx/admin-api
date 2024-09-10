@@ -56,6 +56,14 @@ export const slashblogs = createTable("slashblogs", {
 export type PortfolioBlog = typeof portfolioblogs.$inferSelect
 export type SlashBlog = typeof slashblogs.$inferSelect
 
+export const settings = createTable("settings", {
+	id: text("id")
+		.$defaultFn(() => createId())
+		.primaryKey(),
+	portfolioBlogWebhook: text("portfolio_blog_webhook"),
+	slashBlogWebhook: text("slash_blog_webhook"),
+})
+
 export const getFirst = <T extends any[]>(values: T): T[number] => {
 	if (values.length !== 1) return null
 	return values[0]

@@ -20,11 +20,11 @@ const config = {
 	transpilePackages: ["geist"],
 	output: "standalone",
 	eslint: {
-		ignoreDuringBuilds: true
+		ignoreDuringBuilds: true,
 	},
 	typescript: {
-		ignoreBuildErrors: true
-	}
+		ignoreBuildErrors: true,
+	},
 }
 
 export default config

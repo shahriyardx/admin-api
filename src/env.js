@@ -24,7 +24,7 @@ export const env = createEnv({
 		),
 		DISCORD_CLIENT_ID: z.string(),
 		DISCORD_CLIENT_SECRET: z.string(),
-		ADMIN_DISCORD_ID: z.string()
+		ADMIN_DISCORD_ID: z.string(),
 	},
 
 	/**

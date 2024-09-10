@@ -34,6 +34,11 @@ export const slashRouter = createTRPCRouter({
 
 			return res.length === 1 ? res[0] : undefined
 		}),
+	deleteBlog: protectedProcedure
+		.input(z.object({ blogId: z.string() }))
+		.mutation(async ({ ctx, input }) => {
+			await ctx.db.delete(slashblogs).where(eq(slashblogs.id, input.blogId))
+		}),
 	allBlogs: protectedProcedure.query(async ({ ctx }) => {
 		return await ctx.db
 			.select()
