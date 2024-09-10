@@ -1,6 +1,6 @@
 import { db } from "@/server/db"
 import { and, eq, ne } from "drizzle-orm"
-import { getFirst, portfolioblogs } from "@/server/db/schema"
+import { getFirst, slashblogs } from "@/server/db/schema"
 
 import type { NextApiRequest, NextApiResponse } from "next"
 
@@ -9,12 +9,9 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
 
 	const data = await db
 		.select()
-		.from(portfolioblogs)
+		.from(slashblogs)
 		.where(
-			and(
-				ne(portfolioblogs.status, "draft"),
-				eq(portfolioblogs.slug, slug as string),
-			),
+			and(ne(slashblogs.status, "draft"), eq(slashblogs.slug, slug as string)),
 		)
 		.then(getFirst)
 
