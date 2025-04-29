@@ -1,7 +1,6 @@
-import AdminDashboard from "@/components/layouts/AdminDashboard"
 import { useSession } from "next-auth/react"
 import { useRouter } from "next/router"
-import React, { useEffect } from "react"
+import { useEffect } from "react"
 
 const Index = () => {
 	const router = useRouter()
@@ -10,11 +9,13 @@ const Index = () => {
 		onUnauthenticated: () => router.push("/login"),
 	})
 
-	if (status === "authenticated") {
-		router.push("/dashboard")
-	} else {
-		router.push("/login")
-	}
+	useEffect(() => {
+		if (status === "authenticated") {
+			router.push("/dashboard")
+		} else {
+			router.push("/login")
+		}
+	}, [status, router])
 
 	return null
 }
