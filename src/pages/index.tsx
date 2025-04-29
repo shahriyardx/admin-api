@@ -12,6 +12,8 @@ const Index = () => {
 
 	if (status === "authenticated") {
 		router.push("/dashboard")
+	} else {
+		router.push("/login")
 	}
 
 	return null
